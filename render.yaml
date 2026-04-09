@@ -9,7 +9,7 @@ services:
     plan: starter
     runtime: elixir
     buildCommand: mix deps.get --only prod && mix compile && mix assets.deploy && mix release
-    startCommand: _build/prod/rel/the_dungeon/bin/the_dungeon eval "TheDungeon.Release.migrate()" && _build/prod/rel/the_dungeon/bin/server
+    startCommand: _build/prod/rel/the_dungeon/bin/the_dungeon eval "TheDungeon.Release.migrate()" && _build/prod/rel/the_dungeon/bin/the_dungeon start
     envVars:
       - key: MIX_ENV
         value: prod
