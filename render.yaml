@@ -1,0 +1,25 @@
+databases:
+  - name: the-dungeon-db
+    plan: basic-256mb
+    diskSizeGB: 1
+
+services:
+  - type: web
+    name: the-dungeon
+    plan: starter
+    runtime: elixir
+    buildCommand: mix deps.get --only prod && mix compile && mix assets.deploy && mix release
+    startCommand: _build/prod/rel/the_dungeon/bin/the_dungeon eval "TheDungeon.Release.migrate()" && _build/prod/rel/the_dungeon/bin/server
+    envVars:
+      - key: MIX_ENV
+        value: prod
+      - key: PHX_SERVER
+        value: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: the-dungeon-db
+          property: connectionString
+      - key: SECRET_KEY_BASE
+        sync: false  # Set in dashboard (mix phx.gen.secret)
+      - key: PHX_HOST
+        sync: false  # Set in dashboard (e.g. the-dungeon.onrender.com)

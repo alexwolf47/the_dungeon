@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <meta
+      name="description"
+      content="The Dungeon PT - Private gym and personal training in Stanhope, County Durham. Personal training, online coaching, and bootcamp group sessions."
+    />
+    <.live_title default="The Dungeon PT" suffix=" | Private Gym & Personal Training">
+      {assigns[:page_title]}
+    </.live_title>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/css/app.css"} />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/js/app.js"}>
+    </script>
+    <script>
+      (() => {
+        const setTheme = (theme) => {
+          if (theme === "system") {
+            localStorage.removeItem("phx:theme");
+            document.documentElement.removeAttribute("data-theme");
+          } else {
+            localStorage.setItem("phx:theme", theme);
+            document.documentElement.setAttribute("data-theme", theme);
+          }
+        };
+        if (!document.documentElement.hasAttribute("data-theme")) {
+          setTheme(localStorage.getItem("phx:theme") || "system");
+        }
+        window.addEventListener("storage", (e) => e.key === "phx:theme" && setTheme(e.newValue || "system"));
+
+        window.addEventListener("phx:set-theme", (e) => setTheme(e.target.dataset.phxTheme));
+      })();
+    </script>
+  </head>
+  <body class="bg-base-100 text-base-content antialiased">
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-base-200/90 backdrop-blur-md border-b border-base-300/50">
+      <nav class="navbar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex-1">
+          <a href="/" class="flex items-center gap-3 group">
+            <span class="text-2xl font-black tracking-tighter text-primary uppercase">
+              The Dungeon
+            </span>
+            <span class="text-xs font-semibold text-base-content/50 uppercase tracking-widest">
+              PT
+            </span>
+          </a>
+        </div>
+        <div class="flex-none hidden lg:block">
+          <ul class="flex items-center gap-1">
+            <li>
+              <a href="/#about" class="nav-tab btn btn-ghost btn-sm text-sm font-medium">About</a>
+            </li>
+            <li>
+              <a href="/#services" class="nav-tab btn btn-ghost btn-sm text-sm font-medium">
+                Services
+              </a>
+            </li>
+            <li>
+              <a href="/#results" class="nav-tab btn btn-ghost btn-sm text-sm font-medium">
+                Results
+              </a>
+            </li>
+            <li>
+              <a href="/#pricing" class="nav-tab btn btn-ghost btn-sm text-sm font-medium">
+                Pricing
+              </a>
+            </li>
+            <li>
+              <a href="/#contact" class="nav-tab btn btn-ghost btn-sm text-sm font-medium">
+                Contact
+              </a>
+            </li>
+            <%= if @current_scope do %>
+              <li>
+                <.link href={~p"/book"} class="btn btn-ghost btn-sm text-sm font-medium">
+                  Book Now
+                </.link>
+              </li>
+              <li>
+                <.link href={~p"/profile"} class="btn btn-ghost btn-sm text-sm font-medium">
+                  Profile
+                </.link>
+              </li>
+              <li>
+                <.link
+                  href={~p"/users/log-out"}
+                  method="delete"
+                  class="btn btn-ghost btn-sm text-sm font-medium"
+                >
+                  Log out
+                </.link>
+              </li>
+            <% else %>
+              <li>
+                <.link href={~p"/users/log-in"} class="btn btn-ghost btn-sm text-sm font-medium">
+                  Log in
+                </.link>
+              </li>
+              <li class="ml-2">
+                <.link
+                  href={~p"/users/register"}
+                  class="btn btn-primary btn-sm text-sm font-bold uppercase tracking-wide"
+                >
+                  Sign Up
+                </.link>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="flex-none lg:hidden">
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-sm">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow-lg mt-2"
+            >
+              <li><a href="/#about">About</a></li>
+              <li><a href="/#services">Services</a></li>
+              <li><a href="/#results">Results</a></li>
+              <li><a href="/#pricing">Pricing</a></li>
+              <li><a href="/#contact">Contact</a></li>
+              <%= if @current_scope do %>
+                <li>
+                  <.link href={~p"/book"}>Book Now</.link>
+                </li>
+                <li>
+                  <.link href={~p"/profile"}>Profile</.link>
+                </li>
+                <li>
+                  <.link href={~p"/users/log-out"} method="delete">Log out</.link>
+                </li>
+              <% else %>
+                <li>
+                  <.link href={~p"/users/log-in"}>Log in</.link>
+                </li>
+                <li class="mt-2">
+                  <.link
+                    href={~p"/users/register"}
+                    class="btn btn-primary btn-sm font-bold uppercase"
+                  >
+                    Sign Up
+                  </.link>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    {@inner_content}
+  </body>
+</html>

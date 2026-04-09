@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.facebook.com)",
+      "WebFetch(domain:www.instagram.com)",
+      "WebFetch(domain:dungeongym.live)",
+      "WebFetch(domain:docs.google.com)",
+      "Bash(mix compile:*)",
+      "Bash(cp \"/Users/alex/code/the_dungeon/photos_to_use/Colour PNG-1 \\(1\\) \\(3\\).png\" /Users/alex/code/the_dungeon/priv/static/images/logo-dungeon.png)",
+      "Bash(cp \"/Users/alex/code/the_dungeon/photos_to_use/IMG_8609.JPG\" /Users/alex/code/the_dungeon/priv/static/images/gym-wide.jpg)",
+      "Bash(cp \"/Users/alex/code/the_dungeon/photos_to_use/IMG_8610.JPG\" /Users/alex/code/the_dungeon/priv/static/images/gym-rack.jpg)",
+      "Bash(cp \"/Users/alex/code/the_dungeon/photos_to_use/IMG_8617.JPG\" /Users/alex/code/the_dungeon/priv/static/images/gym-dumbbells.jpg)",
+      "Bash(cp \"/Users/alex/code/the_dungeon/photos_to_use/IMG_8618.JPG\" /Users/alex/code/the_dungeon/priv/static/images/gym-cable.jpg)",
+      "Bash(mix:*)",
+      "WebFetch(domain:render.com)"
+    ]
+  }
+}
